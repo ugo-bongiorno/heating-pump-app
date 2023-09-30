@@ -36,12 +36,32 @@ Open your file `~/.profile`, and add the following line at the end :
 export LIBMODBUS_INSTALL_PATH=/absolute/path/to/your/local/install/install/of/libmodbus/
 ```
 
+After updating the file `~/.profile`, you have to load it again :
+
+```shell
+$ source ~/.profile
+```
+
 #### Compile the .c modbus-RTU communication program
 
-```
-cd hp_tools && make clean && make && cd ..
+```shell
+$ cd hp_tools && make clean && make && cd ..
 ```
 
+#### Create a virtual env and activate it
+```shell
+$ python3 -m venv env
+```
+
+```shell
+$ source env/bin/activate
+```
+
+#### Install python dependencies
+
+```shell
+(env) $ pip install --upgrade pip && pip install -r requirements.txt
+```
 
 
 ### Set up the frontend
