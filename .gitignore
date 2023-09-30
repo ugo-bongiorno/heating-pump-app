@@ -127,3 +127,9 @@ cython_debug/
 
 # PyCharm
 .idea/
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
