@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="informations_container">
+    <!-- Current water temperature -->
+    <div class="water_temp">
+      <mat-card>
+        <mat-card-title>
+          Current water temperature
+        </mat-card-title>
+        <mat-card-content>
+          {{currentWaterTemperature}}°C
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Current target water temperature -->
+    <div class="target_temp">
+      <mat-card>
+        <mat-card-title>
+          Target water temperature
+        </mat-card-title>
+        <mat-card-content>
+          {{currentTargetTemperature}}°C
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- Set target water temperature -->
+  <div class="target_temp">
+    <hr class="rounded">
+    <mat-card>
+      <mat-card-title>
+        Set target water temperature
+      </mat-card-title>
+      <mat-card-content>
+        <mat-form-field appearance="fill">
+          <mat-label>Target</mat-label>
+          <input matInput type="number" [formControl]="targetWaterTemp">
+        </mat-form-field>
+        <!-- Error message for "too big" -->
+        <div class="error_message" *ngIf="targetWaterTemp.hasError('max')">
+          Value is too big (maximum allowed: 35).
+        </div>
+
+        <!-- Error message for "too small" -->
+        <div class="error_message" *ngIf="targetWaterTemp.hasError('min')">
+          Value is too small (minimum allowed: 15).
+        </div>
+        <!-- Submit button -->
+        <button class="submit_button"
+                mat-stroked-button color="primary"
+                [disabled]="targetWaterTemp.invalid"
+                (keyup.enter)="submitTargetWaterTemp()"
+                (click)="submitTargetWaterTemp()">
+        Submit</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

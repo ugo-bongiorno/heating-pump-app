@@ -1,0 +1,37 @@
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: start;
+    height: 100%;
+}
+.informations_container {
+    display: flex;
+    flex-direction: row;
+    margin: 4%;
+}
+.water_temp {
+    margin: 2%;
+    text-align: center;
+    float: none;
+    overflow: hidden;
+}
+.target_temp {
+    margin: 2%;
+    text-align: center;
+    float: none;
+    overflow: hidden;
+}
+
+.error_message {
+  color: red;
+  font-size: medium
+}
+
+.submit_button {
+    font-size: xx-large !important;
+}
+
+.mat-card-content {
+    font-size: xx-large !important;
+}
