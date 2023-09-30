@@ -1,12 +1,15 @@
 # Heat pump remote control app
 
-This repo contains a small web-app to remotely control my pool's heat pump.
+This repo contains a small web-app to remotely control my swimming pool's heat pump.
 
 My heat pump has a modbus port (in RTU mode), which allows to control it from a connected device.
-My work is based on [this manual](https://gestor-doc-s3.s3.eu-west-1.amazonaws.com/documents/category/MAN10_54068-MB_ASTRALPOOLHEAT%20II%20-%20MODBUS_AP_v02_2015-.pdf) (direct download),
+My work is based on [this manual (direct download)](https://gestor-doc-s3.s3.eu-west-1.amazonaws.com/documents/category/MAN10_54068-MB_ASTRALPOOLHEAT%20II%20-%20MODBUS_AP_v02_2015-.pdf),
 for a different model, which documents all the modbus messages for each functionality.
 Luckily, the registers and associated values are the same for my model.
 
+The frontend is built using Angular.
+
+The backend is built using Python, and the code to communicate with a modbus device connected via USB is written in C. 
 
 ## Installation
 
@@ -14,8 +17,8 @@ TBD
 
 ## Developer Setup
 
-TBD
- 
+This section will guide you through all the steps to set up the project as a developer.
+
 ### Set up the backend
 
 In this section, we will assume your current working directory is ``backend/``
@@ -71,5 +74,25 @@ $ source env/bin/activate
 
 ### Set up the frontend
 
-TBD
+In this section, we will assume your current working directory is ``frontend/heat-pump-app/``
+
+#### install node and angular
+
+Follow the installation steps to install [node (and npm)](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) and [angular](https://angular.io/guide/setup-local#install-the-angular-cli)
+
+#### Install the dependencies
+
+Run 
+```shell
+$ npm install
+```
+
+#### Run the frontend development server
+
+Run 
+```shell
+$ ng serve
+```
+
+Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
