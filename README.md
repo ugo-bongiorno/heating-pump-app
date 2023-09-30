@@ -33,7 +33,7 @@ An easy way to automatically set up environment variables on session startup is 
 Open your file `~/.profile`, and add the following line at the end :
 
 ```
-export LIBMODBUS_INSTALL_PATH=/absolute/path/to/your/local/install/install/of/libmodbus/
+export LIBMODBUS_INSTALL_PATH=/absolute/path/to/your/local/install/of/libmodbus/
 ```
 
 After updating the file `~/.profile`, you have to load it again :
@@ -63,6 +63,11 @@ $ source env/bin/activate
 (env) $ pip install --upgrade pip && pip install -r requirements.txt
 ```
 
+#### Start the backend server
+
+```shell
+(env) $ uvicorn heat_pump_backend:app
+```
 
 ### Set up the frontend
 
