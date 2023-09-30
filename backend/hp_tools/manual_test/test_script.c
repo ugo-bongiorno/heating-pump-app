@@ -4,7 +4,7 @@
 
 int main(void) {
 
-  int current_temp = get_water_temperature();
+  int current_temp = read_water_temperature();
 
   printf("current water temperature : %i\n", current_temp);
   printf("current target temperature : %i\n", (int) (read_target_water_temperature() / 10));

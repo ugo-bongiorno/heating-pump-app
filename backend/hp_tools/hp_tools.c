@@ -48,10 +48,10 @@ modbus_t *create_modbus_ctx_and_connect() {
 
 
 
-// get the temperature of the water from the water temperature probe
+// read the temperature of the water from the water temperature probe
 // params : None
 // returns : int
-int get_water_temperature() {
+int read_water_temperature() {
   modbus_t *ctx = create_modbus_ctx_and_connect();
   if (ctx == NULL) {
     fprintf(stderr, "Error when trying to create a modbus context and connect to the device. See previous errors.\n");
