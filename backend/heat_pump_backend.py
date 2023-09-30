@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Dict
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 
@@ -24,6 +25,22 @@ class WaterTemperature(BaseModel):
 
 
 app = FastAPI()
+
+# allow specific CORS origins (so that requests
+# from the frontend pass through)
+allowed_cors_origins = [
+    "http://localhost",
+    "http://localhost:4200",
+]
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_cors_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/get_water_temperature/", response_model=WaterTemperature)
