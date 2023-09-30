@@ -28,9 +28,9 @@ Yet, I found this nice modbus C library, that works with RTU mode : [libmodbus](
 
 #### Prepare environment variables
 
-An easy way to set up "permanent" environment variables is to add them at the end of `~/.profile` :
+An easy way to automatically set up environment variables on session startup is to add them at the end of `~/.profile` :
 
-Open your file `~/.profile`, and add the following line at the end
+Open your file `~/.profile`, and add the following line at the end :
 
 ```
 export LIBMODBUS_INSTALL_PATH=/absolute/path/to/your/local/install/install/of/libmodbus/
