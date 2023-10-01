@@ -7,9 +7,10 @@ My work is based on [this manual (direct download)](https://gestor-doc-s3.s3.eu-
 for a different model, which documents all the modbus messages for each functionality.
 Luckily, the registers and associated values are the same for my model.
 
-The frontend is built using Angular.
 
 The backend is built using Python, and the code to communicate with a modbus device connected via USB is written in C. 
+
+The frontend is built using Angular. It is my first time doing frontend, so it is clearly not perfect.
 
 ## Installation
 
