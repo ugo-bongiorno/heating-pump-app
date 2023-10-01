@@ -21,7 +21,11 @@ a login system, and authorizations.
 
 ## Run the tests
 
-Make sur your working directory is ``backend/``, then simply run
+The tests are located in ``backend/tests``. They only test our API endpoints :
+the `.c` functions are mocked. To read more about the `.c` functions and how
+to 'test' them, refer to [hp_tools/README.md](./hp_tools/README.md).
+
+To run the tests, make sur your working directory is ``backend/``, then simply run
 
 ```shell
 (env) $ pytest
