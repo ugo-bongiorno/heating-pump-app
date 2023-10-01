@@ -66,6 +66,12 @@ $ source env/bin/activate
 (env) $ pip install --upgrade pip && pip install -r requirements.txt
 ```
 
+#### Run unit tests
+
+```shell
+(env) $ pytest
+```
+
 #### Start the backend server
 
 ```shell

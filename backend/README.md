@@ -20,4 +20,9 @@ If I wanted to make this tool 100% remote (accessible from outside my local netw
 a login system, and authorizations.
 
 ## Run the tests
-TBD
+
+Make sur your working directory is ``backend/``, then simply run
+
+```shell
+(env) $ pytest
+```
