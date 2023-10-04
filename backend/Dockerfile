@@ -1,33 +1,49 @@
-FROM python:3.9
+FROM debian:bullseye-slim
 
 WORKDIR /usr/src/heat-pump-app-backend/
+
+RUN apt update
+
+RUN apt install python3 python3-pip -y
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# copy, and compile .c source code
-COPY ./hp_tools ./hp_tools
+# install libmodbus dependencies
+RUN apt install curl -y
 
-WORKDIR /usr/src/heat-pump-app-backend/hp_tools
+RUN apt install autoconf -y
+
+RUN apt install libtool -y
+
+# install libmodbus
+RUN mkdir /usr/src/libmodbus/
+
+WORKDIR /usr/src/
 
 RUN curl -LO https://github.com/stephane/libmodbus/archive/refs/tags/v3.1.10.tar.gz
 
-RUN mkdir libmodbus && tar -xvf v3.1.10.tar.gz -C ./libmodbus
+RUN tar -xvf v3.1.10.tar.gz -C ./libmodbus
 
-WORKDIR /usr/src/heat-pump-app-backend/hp_tools/libmodbus/libmodbus-3.1.10
+WORKDIR /usr/src/libmodbus/libmodbus-3.1.10
 
 RUN ./autogen.sh
 
-ENV LIBMODBUS_INSTALL_PATH /usr/src/heat-pump-app-backend/hp_tools/libmodbus/libmodbus-3.1.10/src/
+RUN ./configure --prefix=/usr/local/ && make && make install
 
-RUN ./configure && make install
+# copy, and compile my .c source code
+WORKDIR /usr/src/heat-pump-app-backend
+
+RUN mkdir -p /usr/src/heat-pump-app-backend/hp_tools
+
+COPY ./hp_tools ./hp_tools
 
 WORKDIR /usr/src/heat-pump-app-backend/hp_tools
 
 RUN make all
 
 # update pip
-WORKDIR /usr/src/heat-pump-app-backend/
+WORKDIR /usr/src/heat-pump-app-backend
 
 RUN pip install --upgrade pip
 
@@ -39,3 +55,9 @@ RUN pip install -r requirements.txt
 
 # now, copy all the source code
 COPY . .
+
+# it is a mystery to me, but installing strace (after compiling my .c code, not before) fixes the bug
+# where ctypes says 'OSError: libmodbus.so.5: cannot open shared object file: No such file or directory'
+RUN apt install strace -y
+
+CMD ["uvicorn", "heat_pump_backend:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-fPIC -L${LIBMODBUS_INSTALL_PATH} -I${LIBMODBUS_INSTALL_PATH} -lmodbus
+CFLAGS=-fPIC `pkg-config --cflags --libs libmodbus`
 
 all: hp_tools.so manual_test/test_script
 
