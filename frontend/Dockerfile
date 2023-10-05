@@ -1,5 +1,4 @@
-# 1st step : build the minified codebase
-FROM node:16.20.2-bullseye as build-stage
+FROM node:16.20.2-bullseye
 WORKDIR /app
 
 # copy the dependencies and install them
@@ -8,4 +7,6 @@ RUN npm ci
 
 # copy the whole code base, and build the frontend
 COPY ./heat-pump-app/ .
+
+# build the minified code base
 RUN npm run build
