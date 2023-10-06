@@ -12,6 +12,8 @@ ENV PYTHONUNBUFFERED 1
 # install libmodbus dependencies
 RUN apt install curl -y
 
+RUN apt install pkg-config -y
+
 RUN apt install autoconf -y
 
 RUN apt install libtool -y
@@ -30,6 +32,8 @@ WORKDIR /usr/src/libmodbus/libmodbus-3.1.10
 RUN ./autogen.sh
 
 RUN ./configure --prefix=/usr/local/ && make && make install
+
+RUN ldconfig
 
 # copy, and compile my .c source code
 WORKDIR /usr/src/heat-pump-app-backend
@@ -55,9 +59,5 @@ RUN pip install -r requirements.txt
 
 # now, copy all the source code
 COPY . .
-
-# it is a mystery to me, but installing strace (after compiling my .c code, not before) fixes the bug
-# where ctypes says 'OSError: libmodbus.so.5: cannot open shared object file: No such file or directory'
-RUN apt install strace -y
 
 CMD ["uvicorn", "heat_pump_backend:app", "--host", "0.0.0.0", "--port", "8000"]
