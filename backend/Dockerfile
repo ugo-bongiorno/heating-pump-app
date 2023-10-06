@@ -60,4 +60,6 @@ RUN pip install -r requirements.txt
 # now, copy all the source code
 COPY . .
 
-CMD ["uvicorn", "heat_pump_backend:app", "--host", "0.0.0.0", "--port", "8000"]
+EXPOSE 8000
+
+CMD ["uvicorn", "heat_pump_backend:app", "--host", "0.0.0.0", "--port", "8000", "--root-path", "/api"]
