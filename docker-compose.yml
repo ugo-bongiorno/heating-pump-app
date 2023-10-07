@@ -1,7 +1,6 @@
 services:
   nginx:
-    build:
-      context: ./frontend
+    image: heat-pump-app-frontend-nginx:1.0
     container_name: "nginx"
     depends_on:
         - backend
@@ -11,8 +10,7 @@ services:
     restart: always
 
   backend:
-    build:
-      context: ./backend
+    image: heat-pump-app-backend:1.0
     container_name: "backend"
     expose:
       # expose port 8000 to other containers

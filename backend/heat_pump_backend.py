@@ -31,6 +31,8 @@ app = FastAPI()
 allowed_cors_origins = [
     "http://localhost",
     "http://localhost:4200",
+    "http://raspberrypi-garage",
+    "http://raspberrypi-garage.local",
 ]
 
 
