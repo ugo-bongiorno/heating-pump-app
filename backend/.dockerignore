@@ -12,6 +12,7 @@ docker-compose.yml
 **/venv
 **/env
 **/.pytest_cache
+**/*.tar
 
 *.o
 *.ko
