@@ -17,4 +17,8 @@ services:
     expose:
       # expose port 8000 to other containers
       - 8000
+    devices:  # allow the backend container to use the host USB port
+    # (for the modbus adapter)
+      # host:container
+      - "/dev/ttyUSB0:/dev/ttyUSB0"
     restart: always
