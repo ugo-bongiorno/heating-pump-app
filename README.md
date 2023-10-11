@@ -30,20 +30,24 @@ Yet, I found this nice modbus C library, that works with RTU mode : [libmodbus](
 
 ##### [Install libmodbus](https://github.com/stephane/libmodbus/#installation)
 
-#### Prepare environment variables
-
-An easy way to automatically set up environment variables on session startup is to add them at the end of `~/.profile` :
-
-Open your file `~/.profile`, and add the following line at the end :
-
-```
-export LIBMODBUS_INSTALL_PATH=/absolute/path/to/your/local/install/of/libmodbus/
-```
-
-After updating the file `~/.profile`, you have to load it again :
+Install libmodbus dependencies :
 
 ```shell
-$ source ~/.profile
+$ sudo apt-get update && sudo apt-get install pkg-config autoconf libtool
+```
+
+Download and extract the source code, then run (from the extracted source code folder)
+
+```shell
+$ /autogen.sh && ./configure && make && make install
+```
+
+N.B. : you can customize the installation path by adding ``--prefix=/custom/install/path/`` after configure (example : ``./configure --prefix=/usr/local/``)
+
+Finally, run 
+
+```shell
+$ ldconfig
 ```
 
 #### Compile the .c modbus-RTU communication program
@@ -102,4 +106,3 @@ $ ng serve
 ```
 
 Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
