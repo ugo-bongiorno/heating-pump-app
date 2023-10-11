@@ -15,7 +15,7 @@ RUN npm run build
 # build a reverse proxy, that will contain the minified codebase
 FROM nginx:latest
 
-COPY --from=build /app/dist/heating-pump-tools/ /usr/share/nginx/html
+COPY --from=build /app/dist/heat-pump-app/ /usr/share/nginx/html
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
 

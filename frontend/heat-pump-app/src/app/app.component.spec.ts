@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'heating-pump-tools'`, () => {
+  it(`should have as title 'heat-pump-app'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('heating-pump-tools');
+    expect(app.title).toEqual('heat-pump-app');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('heating-pump-tools app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('heat-pump-app app is running!');
   });
 });

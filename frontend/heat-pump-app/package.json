@@ -1,5 +1,5 @@
 {
-  "name": "heating-pump-tools",
+  "name": "heat-pump-app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
