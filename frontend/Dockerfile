@@ -9,7 +9,6 @@ RUN npm ci
 # copy the whole code base, and build the frontend
 COPY ./heat-pump-app/ .
 
-# build the minified code base
 RUN npm run build
 
 # build a reverse proxy, that will contain the minified codebase
