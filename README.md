@@ -22,13 +22,16 @@ In this section, we will describe how to run this project locally, on a desktop.
 
 #### Set required environment variables
 
-The following environment variable is required for the docker compose : ``MODBUS_USB_DEVICE``
+The following environment variable is required for the docker compose : ``MODBUS_USB_DEVICE``. It should be the local
+/dev path of the USB modbus adapter connected to your heat pump (for example ``/dev/ttyUSB0``)
 
-You can set it automatically on session startup by adding the following line at the end of the file ``~/.profile``:
+You can set this environment variable automatically on session startup by adding the following line at the end of the file ``~/.profile``:
 
 ```shell
-export MODBUS_USB_DEVICE="/dev/ttyUSB0"
+export MODBUS_USB_DEVICE="/dev/yourUSB"
 ```
+
+(replace ``"yourUSB"`` by the actual /dev path of your USB modbus adapter)
 
 After updating the file ``~/.profile``, you have to load it again (or restart your session) :
 
