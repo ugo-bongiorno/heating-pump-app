@@ -36,9 +36,9 @@ After updating the file ``~/.profile``, you have to load it again (or restart yo
 $ source ~/.profile
 ```
 
-#### run the docker compose
+#### Run the project using docker compose
 
-To run the project, simply run
+To start the app, simply run
 
 ```shell
 $ docker compose build && docker compose run
@@ -72,7 +72,7 @@ Download and extract the source code, then run (from the extracted source code f
 $ /autogen.sh && ./configure && make && make install
 ```
 
-N.B. : you can customize the installation path by adding ``--prefix=/custom/install/path/`` after configure (example : ``./configure --prefix=/usr/local/``)
+N.B. : you can customize the installation path by adding ``--prefix=/custom/install/path/`` after ``./configure`` (example : ``./configure --prefix=/usr/local/``)
 
 Finally, run 
 
