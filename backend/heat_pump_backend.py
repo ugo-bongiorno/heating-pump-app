@@ -8,7 +8,7 @@ from typing import Dict
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 # define the wrappers for our .c functions
@@ -16,12 +16,27 @@ HP_TOOLS = ctypes.CDLL(str((Path(__file__).parent / "hp_tools/hp_tools.so").reso
 
 
 # define templates for our input / output specifications
-class TargetTemperature(BaseModel):
-    target_water_temperature: int
+class NewTargetTemperature(BaseModel):
+    target_water_temperature: int = Field(
+        title="Target Water Temperature",
+        description="The target water temperature to be set, in °C",
+        ge=15,
+        le=35,
+    )
 
 
-class WaterTemperature(BaseModel):
-    current_water_temperature: int
+class CurrentTargetTemperature(BaseModel):
+    target_water_temperature: int = Field(
+        title="Current Target Water Temperature",
+        description="The current target water temperature, in °C",
+    )
+
+
+class CurrentWaterTemperature(BaseModel):
+    current_water_temperature: int = Field(
+        title="Current Water Temperature",
+        description="The current water temperature, in °C",
+    )
 
 
 app = FastAPI()
@@ -43,7 +58,7 @@ app.add_middleware(
 )
 
 
-@app.get("/get_water_temperature/", response_model=WaterTemperature)
+@app.get("/get_water_temperature/", response_model=CurrentWaterTemperature)
 async def get_water_temperature() -> Dict[str, int]:
     """
     Get the current water temperature.
@@ -64,7 +79,7 @@ async def get_water_temperature() -> Dict[str, int]:
     return {"current_water_temperature": current_water_temp}
 
 
-@app.get("/get_target_water_temperature/", response_model=TargetTemperature)
+@app.get("/get_target_water_temperature/", response_model=CurrentTargetTemperature)
 async def get_target_water_temperature() -> Dict[str, int]:
     """
     Get the target water temperature.
@@ -85,9 +100,9 @@ async def get_target_water_temperature() -> Dict[str, int]:
     return {"target_water_temperature": target_water_temp}
 
 
-@app.post("/set_target_water_temperature/", response_model=TargetTemperature)
+@app.post("/set_target_water_temperature/", response_model=NewTargetTemperature)
 async def set_target_water_temperature(
-    target_temperature: TargetTemperature,
+    target_temperature: NewTargetTemperature,
 ) -> Dict[str, int]:
     """
     Set the target water temperature.

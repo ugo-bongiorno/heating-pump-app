@@ -109,6 +109,22 @@ class TestHeatPumpBackend(TestCase):
         self.assertDictEqual(response.json(), {"target_water_temperature": 30})
         mock_set_target_water_temperature.assert_called_once_with(30)
 
+    def test_set_target_water_temperature_value_out_of_range(self):
+        """
+        Tests the endpoint ``set_target_water_temperature``, when the user input is out of the expected range
+        """
+        # when the target is too small
+        response = self.client.post(
+            "/set_target_water_temperature/", json={"target_water_temperature": 10}
+        )
+        self.assertEqual(response.status_code, 422)
+
+        # or too big
+        response = self.client.post(
+            "/set_target_water_temperature/", json={"target_water_temperature": 50}
+        )
+        self.assertEqual(response.status_code, 422)
+
     @patch("backend.heat_pump_backend.HP_TOOLS.set_target_water_temperature")
     def test_set_target_water_temperature_communication_error(
         self, mock_set_target_water_temperature
