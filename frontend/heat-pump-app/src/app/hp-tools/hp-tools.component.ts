@@ -18,7 +18,28 @@ export class HpToolsComponent implements OnInit {
 
   ngOnInit(): void {
     // build the target water temperature from control
-    this.targetWaterTemp = new FormControl(null, [Validators.required, Validators.max(35), Validators.min(15)]);
+    this.targetWaterTemp = new FormControl(null, [
+      Validators.required,
+      Validators.max(40),
+      Validators.min(12),
+      isMultipleOfHalf
+    ]);
+
+    // custom check to ensure the user input value is a multiple of 0.5
+    function isMultipleOfHalf(control: FormControl) {
+      const value = control.value;
+
+      // Don't perform validation if the value is not set
+      if (value === null || value === undefined) {
+        return null;
+      }
+
+      if (value % 0.5 === 0) {
+        return null;
+      } else {
+        return { notMultipleOfHalf: true };
+      }
+    }
 
     // get current water temperature
     this.refreshCurrentWaterTemp()
