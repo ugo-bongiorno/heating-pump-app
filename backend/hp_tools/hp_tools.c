@@ -49,6 +49,7 @@ modbus_t *create_modbus_ctx_and_connect() {
 
 
 // read the temperature of the water from the water temperature probe
+// the output will be in tenth of Celsius degrees
 // params : None
 // returns : int
 int read_water_temperature() {
@@ -86,7 +87,9 @@ int read_water_temperature() {
 
 
 // read the target temperature of the water
-// returns : int : the target water temperature in tenth of cesius degrees
+// the output will be in tenth of Celsius degrees
+// params : None
+// returns : int
 int read_target_water_temperature() {
   modbus_t *ctx = create_modbus_ctx_and_connect();
   if (ctx == NULL) {
@@ -122,7 +125,7 @@ int read_target_water_temperature() {
 
 
 // set the target temperature of the water
-// params : int target_temp : the target water temperature in cesius degrees
+// params : int target_temp : int : the target water temperature in tenth of Celsius degrees
 // returns : int
 int set_target_water_temperature(int target_temp) {
   modbus_t *ctx = create_modbus_ctx_and_connect();
@@ -133,7 +136,7 @@ int set_target_water_temperature(int target_temp) {
 
 
   // write in the target water temperature register
-  rc = modbus_write_register(ctx, 36, 10 * target_temp);
+  rc = modbus_write_register(ctx, 36, target_temp);
   if (rc == -1) {
       fprintf(stderr, "%s\n", modbus_strerror(errno));
       return -1;
