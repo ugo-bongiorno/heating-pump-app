@@ -18,5 +18,5 @@ services:
     devices:  # allow the backend container to use the host USB port
     # (for the modbus adapter)
       # host:container
-      - "/dev/ttyUSB0:/dev/ttyUSB0"
+      - "${MODBUS_USB_DEVICE}:/dev/ttyUSB0"
     restart: always

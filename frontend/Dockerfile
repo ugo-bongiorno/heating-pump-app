@@ -9,13 +9,12 @@ RUN npm ci
 # copy the whole code base, and build the frontend
 COPY ./heat-pump-app/ .
 
-# build the minified code base
 RUN npm run build
 
 # build a reverse proxy, that will contain the minified codebase
 FROM nginx:latest
 
-COPY --from=build /app/dist/heating-pump-tools/ /usr/share/nginx/html
+COPY --from=build /app/dist/heat-pump-app/ /usr/share/nginx/html
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
 

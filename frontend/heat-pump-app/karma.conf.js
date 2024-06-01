@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/heating-pump-tools'),
+      dir: require('path').join(__dirname, './coverage/heat-pump-app'),
       subdir: '.',
       reporters: [
         { type: 'html' },

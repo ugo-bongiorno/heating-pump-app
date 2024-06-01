@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "heating-pump-tools": {
+    "heat-pump-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/heating-pump-tools",
+            "outputPath": "dist/heat-pump-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "heating-pump-tools:build:production"
+              "browserTarget": "heat-pump-app:build:production"
             },
             "development": {
-              "browserTarget": "heating-pump-tools:build:development"
+              "browserTarget": "heat-pump-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "heating-pump-tools:build"
+            "browserTarget": "heat-pump-app:build"
           }
         },
         "test": {
@@ -104,5 +104,5 @@
       }
     }
   },
-  "defaultProject": "heating-pump-tools"
+  "defaultProject": "heat-pump-app"
 }

@@ -35,7 +35,7 @@ RUN ./configure --prefix=/usr/local/ && make && make install
 
 RUN ldconfig
 
-# copy, and compile my .c source code
+# copy, and compile the modbus heat pump communication tool
 WORKDIR /usr/src/heat-pump-app-backend
 
 RUN mkdir -p /usr/src/heat-pump-app-backend/hp_tools
@@ -46,7 +46,7 @@ WORKDIR /usr/src/heat-pump-app-backend/hp_tools
 
 RUN make all
 
-# update pip
+# install the backend
 WORKDIR /usr/src/heat-pump-app-backend
 
 RUN pip install --upgrade pip
@@ -57,9 +57,11 @@ COPY ./requirements.txt .
 
 RUN pip install -r requirements.txt
 
-# now, copy all the source code
+# copy all the source code
 COPY . .
 
+# export port 8000 to other containers in the docker compose
 EXPOSE 8000
 
+# run the backend server
 CMD ["uvicorn", "heat_pump_backend:app", "--host", "0.0.0.0", "--port", "8000", "--root-path", "/api"]

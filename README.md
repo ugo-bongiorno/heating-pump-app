@@ -4,8 +4,8 @@ This repo contains a small web-app to remotely control my swimming pool's heat p
 
 My heat pump has a modbus port (in RTU mode), which allows to control it from a connected device.
 My work is based on [this manual (direct download)](https://gestor-doc-s3.s3.eu-west-1.amazonaws.com/documents/category/MAN10_54068-MB_ASTRALPOOLHEAT%20II%20-%20MODBUS_AP_v02_2015-.pdf),
-for a different model, which documents all the modbus messages for each functionality.
-Luckily, the registers and associated values are the same for my model.
+for a different model of the same brand, which documents all the modbus messages for each functionality.
+Luckily, the registers and associated values are the same for my heat pump model.
 
 
 The backend is built using Python, and the code to communicate with a modbus device connected via USB is written in C. 
@@ -14,7 +14,40 @@ The frontend is built using Angular. It is my first time doing frontend, so it i
 
 ## Installation
 
-TBD
+The installation and run of the project require Docker. See the [official documentation](https://docs.docker.com/engine/install/) to install it.
+
+### Local installation
+
+In this section, we will describe how to run this project locally, on a desktop.
+
+#### Set required environment variables
+
+The following environment variable is required for the docker compose : ``MODBUS_USB_DEVICE``. It should be the local
+/dev path of the USB modbus adapter connected to your heat pump (for example ``/dev/ttyUSB0``)
+
+You can set this environment variable automatically on session startup by adding the following line at the end of the file ``~/.profile``:
+
+```shell
+export MODBUS_USB_DEVICE="/dev/yourUSB"
+```
+
+(replace ``"yourUSB"`` by the actual /dev path of your USB modbus adapter)
+
+After updating the file ``~/.profile``, you have to load it again (or restart your session) :
+
+```shell
+$ source ~/.profile
+```
+
+#### Run the project using docker compose
+
+To start the app, simply run
+
+```shell
+$ docker compose build && docker compose run
+```
+
+The project should be accessible at http://localhost:8000 
 
 ## Developer Setup
 
@@ -30,20 +63,24 @@ Yet, I found this nice modbus C library, that works with RTU mode : [libmodbus](
 
 ##### [Install libmodbus](https://github.com/stephane/libmodbus/#installation)
 
-#### Prepare environment variables
-
-An easy way to automatically set up environment variables on session startup is to add them at the end of `~/.profile` :
-
-Open your file `~/.profile`, and add the following line at the end :
-
-```
-export LIBMODBUS_INSTALL_PATH=/absolute/path/to/your/local/install/of/libmodbus/
-```
-
-After updating the file `~/.profile`, you have to load it again :
+Install libmodbus dependencies :
 
 ```shell
-$ source ~/.profile
+$ sudo apt-get update && sudo apt-get install pkg-config autoconf libtool
+```
+
+Download and extract the source code, then run (from the extracted source code folder)
+
+```shell
+$ /autogen.sh && ./configure && make && make install
+```
+
+N.B. : you can customize the installation path by adding ``--prefix=/custom/install/path/`` after ``./configure`` (example : ``./configure --prefix=/usr/local/``)
+
+Finally, run 
+
+```shell
+$ ldconfig
 ```
 
 #### Compile the .c modbus-RTU communication program
@@ -102,4 +139,3 @@ $ ng serve
 ```
 
 Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
