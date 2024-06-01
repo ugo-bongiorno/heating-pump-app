@@ -46,6 +46,11 @@ WORKDIR /usr/src/heat-pump-app-backend/hp_tools
 
 RUN make all
 
+# install rust (fastAPI dependency)
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+ENV PATH="/root/.cargo/bin:${PATH}"
+
 # install the backend
 WORKDIR /usr/src/heat-pump-app-backend
 
